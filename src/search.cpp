@@ -821,6 +821,11 @@ namespace {
         thisThread->mainHistory[~us][from_to((ss-1)->currentMove)] << bonus;
     }
 
+    if (   !rootNode // The required rootNode PV handling is not available in qsearch
+        &&  depth == 1
+        &&  eval <= alpha - 510)
+        return qsearch<NT>(pos, ss, alpha, beta);
+
     // Set up improving flag that is used in various pruning heuristics
     // We define position as improving if static evaluation of position is better
     // Than the previous static evaluation at our turn
