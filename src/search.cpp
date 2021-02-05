@@ -1198,6 +1198,10 @@ moves_loop: // When in check, search starts from here
               if (   !givesCheck
                   && ss->staticEval + PieceValue[EG][pos.captured_piece()] + 210 * depth <= alpha)
                   r++;
+
+              // Less reduction for captures if in check
+              if (ss->inCheck)
+                  r--;
           }
           else
           {
