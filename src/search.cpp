@@ -1399,6 +1399,11 @@ moves_loop: // When in check, search starts from here
     else if (depth > 3)
         ss->ttPv = ss->ttPv && (ss+1)->ttPv;
 
+    if (   (ss-1)->currentMove == MOVE_NULL
+         && pos.capture(bestMove))
+           (ss-1)->OppThreatMove = bestMove;
+
+
     // Write gathered information in transposition table
     if (!excludedMove && !(rootNode && thisThread->pvIdx))
         tte->save(posKey, value_to_tt(bestValue, ss->ply), ss->ttPv,
