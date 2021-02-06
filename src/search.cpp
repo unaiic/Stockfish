@@ -1181,6 +1181,7 @@ moves_loop: // When in check, search starts from here
               r++;
 
           if (!PvNode && thisThread->bestMoveChanges < std::min((depth + 1) / 4, 3))
+              r++;
 
           // More reductions for late moves if position was not in previous PV
           if (moveCountPruning && !formerPv)
