@@ -1596,6 +1596,11 @@ moves_loop: // When in check, search starts from here
           && (*contHist[1])[pos.moved_piece(move)][to_sq(move)] < CounterMovePruneThreshold)
           continue;
 
+      if (  !givesCheck && bestValue > VALUE_TB_LOSS_IN_MAX_PLY && captureOrPromotion
+         && moveCount > 2
+         && thisThread->captureHistory[pos.moved_piece(move)][to_sq(move)][type_of(pos.piece_on(to_sq(move)))] < 0)
+          continue;
+
       // Make and search the move
       pos.do_move(move, st, givesCheck);
       value = -qsearch<NT>(pos, ss+1, -beta, -alpha, depth - 1);
