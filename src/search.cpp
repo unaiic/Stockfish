@@ -1203,10 +1203,16 @@ moves_loop: // When in check, search starts from here
 
           if (captureOrPromotion)
           {
+              // Decrease reduction if capture/promotion was best in sibling node
+              if (move == ss->killers[2])
+                  r -= 2;
+              else
+              {
               // Unless giving check, this capture is likely bad
               if (   !givesCheck
                   && ss->staticEval + PieceValue[EG][pos.captured_piece()] + 210 * depth <= alpha)
                   r++;
+              }
           }
           else
           {
