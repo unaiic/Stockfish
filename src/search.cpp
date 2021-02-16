@@ -1201,6 +1201,10 @@ moves_loop: // When in check, search starts from here
           if (singularQuietLMR)
               r--;
 
+          // Less reduction for checking move at non-PV nodes
+          if (!PvNode && givesCheck)
+              r--;
+
           if (captureOrPromotion)
           {
               // Unless giving check, this capture is likely bad
