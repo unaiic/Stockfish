@@ -35,6 +35,9 @@
 #include "uci.h"
 #include "syzygy/tbprobe.h"
 
+int t[3] = {10, 2, 24};
+TUNE(t);
+
 namespace Search {
 
   LimitsType Limits;
@@ -1171,6 +1174,14 @@ moves_loop: // When in check, search starts from here
               || thisThread->ttHitAverage < 432 * TtHitAverageResolution * TtHitAverageWindow / 1024))
       {
           Depth r = reduction(improving, depth, moveCount);
+
+          // Decrease reduction at non-check cut nodes for second move at low depths
+          if (   cutNode
+              && depth <= t[0]
+              && moveCount <= t[1]
+              && !ss->inCheck
+              && ss->staticEval >= alpha - t[2] * depth)
+              r--;
 
           // Decrease reduction if the ttHit running average is large
           if (thisThread->ttHitAverage > 537 * TtHitAverageResolution * TtHitAverageWindow / 1024)
