@@ -35,6 +35,9 @@
 #include "uci.h"
 #include "syzygy/tbprobe.h"
 
+int t[4] = {2, 12, 1, 12};
+TUNE(t);
+
 namespace Search {
 
   LimitsType Limits;
@@ -1712,7 +1715,7 @@ moves_loop: // When in check, search starts from here
   void update_all_stats(const Position& pos, Stack* ss, Move bestMove, Value bestValue, Value beta, Square prevSq,
                         Move* quietsSearched, int quietCount, Move* capturesSearched, int captureCount, Depth depth) {
 
-    int bonus1, bonus2;
+    int bonus1, bonus2, bonus3;
     Color us = pos.side_to_move();
     Thread* thisThread = pos.this_thread();
     CapturePieceToHistory& captureHistory = thisThread->captureHistory;
@@ -1726,7 +1729,8 @@ moves_loop: // When in check, search starts from here
     if (!pos.capture_or_promotion(bestMove))
     {
         // Increase stats for the best move in case it was a quiet move
-        update_quiet_stats(pos, ss, bestMove, bonus2, depth);
+        bonus3 = bonus2 * (t[0] * quietCount + t[1]) / (t[2] * quietCount + t[3]);
+        update_quiet_stats(pos, ss, bestMove, bonus3, depth);
 
         // Decrease stats for all non-best quiet moves
         for (int i = 0; i < quietCount; ++i)
