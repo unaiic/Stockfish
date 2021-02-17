@@ -35,6 +35,9 @@
 #include "uci.h"
 #include "syzygy/tbprobe.h"
 
+int t[] = {22661, 26237, 4506, 5337, 4341, 16384, 14382};
+TUNE(t);
+
 namespace Search {
 
   LimitsType Limits;
@@ -839,7 +842,7 @@ namespace {
     // Step 8. Null move search with verification search (~40 Elo)
     if (   !PvNode
         && (ss-1)->currentMove != MOVE_NULL
-        && (ss-1)->statScore < 22661
+        && (ss-1)->statScore < t[0]
         &&  eval >= beta
         &&  eval >= ss->staticEval
         &&  ss->staticEval >= beta - 24 * depth - 34 * improving + 162 * ss->ttPv + 159
@@ -1075,7 +1078,7 @@ moves_loop: // When in check, search starts from here
                   &&  (*contHist[0])[movedPiece][to_sq(move)]
                     + (*contHist[1])[movedPiece][to_sq(move)]
                     + (*contHist[3])[movedPiece][to_sq(move)]
-                    + (*contHist[5])[movedPiece][to_sq(move)] / 3 < 26237)
+                    + (*contHist[5])[movedPiece][to_sq(move)] / 3 < t[1])
                   continue;
 
               // Prune moves with negative SEE (~20 Elo)
@@ -1167,7 +1170,7 @@ moves_loop: // When in check, search starts from here
               || moveCountPruning
               || ss->staticEval + PieceValue[EG][pos.captured_piece()] <= alpha
               || cutNode
-              || (!PvNode && !formerPv && captureHistory[movedPiece][to_sq(move)][type_of(pos.captured_piece())] < 4506)
+              || (!PvNode && !formerPv && captureHistory[movedPiece][to_sq(move)][type_of(pos.captured_piece())] < t[2])
               || thisThread->ttHitAverage < 432 * TtHitAverageResolution * TtHitAverageWindow / 1024))
       {
           Depth r = reduction(improving, depth, moveCount);
@@ -1232,7 +1235,7 @@ moves_loop: // When in check, search starts from here
                              + (*contHist[0])[movedPiece][to_sq(move)]
                              + (*contHist[1])[movedPiece][to_sq(move)]
                              + (*contHist[3])[movedPiece][to_sq(move)]
-                             - 5337;
+                             - t[3];
 
               // Decrease/increase reduction by comparing opponent's stat score (~10 Elo)
               if (ss->statScore >= -89 && (ss-1)->statScore < -116)
@@ -1246,9 +1249,9 @@ moves_loop: // When in check, search starts from here
               // use sum of main history and first continuation history with an offset
               if (ss->inCheck)
                   r -= (thisThread->mainHistory[us][from_to(move)]
-                     + (*contHist[0])[movedPiece][to_sq(move)] - 4341) / 16384;
+                     + (*contHist[0])[movedPiece][to_sq(move)] - t[4]) / t[5];
               else
-                  r -= ss->statScore / 14382;
+                  r -= ss->statScore / t[6];
           }
 
           Depth d = std::clamp(newDepth - r, 1, newDepth);
