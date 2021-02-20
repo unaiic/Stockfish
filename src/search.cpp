@@ -61,7 +61,7 @@ namespace {
   TUNE(netbiases);
   int netweights[32] = {-37,  -20,  -75,  56, -27,  121,  -119, 30, 37, 70, -26,  24, 2, -39,  -21,  90, 
   -64,  43, 47, 40, -22,  -19,  23, -23,  -29,  -33,  -19,  -12,  -35,  35, -19,  21};
-  auto myfunc127 = [](int m){ return std::pair<int, int>(std::max(-127, m - 80),std::min(127,m + 80));};
+  auto myfunc127 = [](int m){ return std::pair<int, int>(std::max(-200, m - 100),std::min(200,m + 100));};
   TUNE(SetRange(myfunc127), netweights);
 
   // Different node types, used as a template parameter
