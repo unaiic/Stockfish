@@ -57,10 +57,10 @@ using namespace Search;
 
 namespace {
 
-  int netbiases[1] = {-193};
+  int netbiases[1] = {-219};
   TUNE(netbiases);
-  int netweights[32] = {-27,  -16,  -76,  57, -21,  121,  -118, 25, 31, 52, -34,  22, 13, -37,  -20,  96, 
-  -57,  34, 36, 41, -18,  -19,  16, -31,  -12,  -36,  -22,  -10,  -33,  26, -12,  18};
+  int netweights[32] = {-37,  -20,  -75,  56, -27,  121,  -119, 30, 37, 70, -26,  24, 2, -39,  -21,  90, 
+  -64,  43, 47, 40, -22,  -19,  23, -23,  -29,  -33,  -19,  -12,  -35,  35, -19,  21};
   auto myfunc127 = [](int m){ return std::pair<int, int>(std::max(-127, m - 80),std::min(127,m + 80));};
   TUNE(SetRange(myfunc127), netweights);
 
