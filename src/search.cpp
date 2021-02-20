@@ -58,7 +58,6 @@ using namespace Search;
 namespace {
 
   int netbiases[1] = {-199};
-  TUNE(netbiases);
   int netweights[32] = {-34,  -20,  -77,  64, -24,  119,  -117, 24, 31, 46, -40,  22, 22, -35,  -20,  98, 
   -60,  43, 43, 34, -19,  -15,  14, -37,  -27,  -37,  -16,  -11,  -36,  30, -11,  18};
 
