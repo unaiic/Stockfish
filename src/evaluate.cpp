@@ -1042,9 +1042,9 @@ make_v:
 /// evaluate() is the evaluator for the outer world. It returns a static
 /// evaluation of the position from the point of view of the side to move.
 
-int tP = 236, tN = 770, tB = 668;
-int tR = 1460, tQ = 2610;
-int tw = 657;
+int tP = 264, tN = 759, tB = 511;
+int tR = 1644, tQ = 2682;
+int tw = 673;
 
 Value Eval::evaluate(const Position& pos) {
 
