@@ -36,7 +36,7 @@
 #include "syzygy/tbprobe.h"
 
 int t[] = {234, 503, 915, 213, 12, 9, 24, 34, 162, 159, 1062, 68,
-190, 209, 44, 4, 6, 400, 4, 218, 7, 174, 157, 7, 3, 537, 210, 89, 116, 112, 100, 155};
+190, 209, 44, 4, 6, 400, 4, 218, 7, 174, 157, 7, 3, 537, 210, 89, 116, 112, 100, 155, 432};
 TUNE(t);
 
 namespace Search {
@@ -1182,7 +1182,13 @@ moves_loop: // When in check, search starts from here
       // Step 16. Reduced depth search (LMR, ~200 Elo). If the move fails high it will be
       // re-searched at full depth.
       if (    depth >= t[24]
-          &&  moveCount > 1 + 2 * rootNode + captureOrPromotion)
+          &&  moveCount > 1 + 2 * rootNode
+          && (  !captureOrPromotion
+              || moveCountPruning
+              || ss->staticEval + PieceValue[EG][pos.captured_piece()] <= alpha
+              || cutNode
+              || (!PvNode && !formerPv && captureHistory[movedPiece][to_sq(move)][type_of(pos.captured_piece())] < 4506)
+              || thisThread->ttHitAverage < t[32] * TtHitAverageResolution * TtHitAverageWindow / 1024))
       {
           Depth r = reduction(improving, depth, moveCount);
 
