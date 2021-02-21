@@ -57,9 +57,9 @@ using namespace Search;
 
 namespace {
 
-  int netbiases[1] = {-191};
-  int netweights[32] = {-39,  -22,  -75,  61, -25,  117,  -123, 30, 28, 89, -11,  22, 19, -27,  -29,  88, 
-  -76,  51, 58, 57, -30,  -29,  25, -31,  -39,  -42,  -13,  -26,  -39,  36, -19,  24};
+  int netbiases[1] = {-205};
+  int netweights[32] = {-38,  -21,  -75,  58, -26,  119,  -121, 30, 33, 79, -19,  23, 10, -33,  -25,  89, 
+  -70,  47, 52, 48, -26,  -24,  24, -27,  -34,  -37,  -16,  -19,  -37,  36, -22,  22};
 
   // Different node types, used as a template parameter
   enum NodeType { NonPV, PV };
