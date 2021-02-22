@@ -60,9 +60,9 @@ using namespace Search;
 
 namespace {
 
-  int netbiases[1] = {-195};
-  int netweights[32] = {-30,  -17,  -76,  53, -23,  120,  -119, 26, 32, 52, -30,  23, 18, -45,  -21,  98, 
-  -57,  37, 38, 46, -19,  -22,  17, -29,  -14,  -40,  -18,  -13,  -32,  30, -12,  20};
+  int netbiases[1] = {-203};
+  int netweights[32] = {-41,  -22,  -74,  39, -31,  115,  -122, 31, 37, 50, -18,  28, 33, -71,  -26,  104, 
+  -57,  46, 44, 61, -24,  -31,  20, -21,  -22,  -54,  -4,  -24,  -27,  42, -14,  26};
 
   // Different node types, used as a template parameter
   enum NodeType { NonPV, PV };
