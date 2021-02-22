@@ -36,9 +36,8 @@
 #include "syzygy/tbprobe.h"
 #include "nnue/evaluate_nnue.h"
 
-int t[] = {234, 503, 915, 213, 12, 9, 24, 34, 162, 159, 1062, 68,
-190, 209, 44, 4, 6, 400, 4, 218, 7, 174, 157, 7, 3, 537, 210, 89, 116, 112, 100, 155, 432};
-TUNE(t, Search::init);
+int t[] = {270, 565, 937, 218, 12, 9, 22, 33, 152, 145, 1091, 68,
+184, 237, 39, 3, 7, 378, 4, 208, 7, 199, 153, 7, 3, 565, 233, 93, 129, 125, 111, 155, 428};
 
 namespace Search {
 
@@ -61,12 +60,9 @@ using namespace Search;
 
 namespace {
 
-  int netbiases[1] = {-193};
-  TUNE(netbiases);
-  int netweights[32] = {-27,  -16,  -76,  57, -21,  121,  -118, 25, 31, 52, -34,  22, 13, -37,  -20,  96, 
-  -57,  34, 36, 41, -18,  -19,  16, -31,  -12,  -36,  -22,  -10,  -33,  26, -12,  18};
-  auto myfunc127 = [](int m){ return std::pair<int, int>(std::max(-127, m - 80),std::min(127,m + 80));};
-  TUNE(SetRange(myfunc127), netweights);
+  int netbiases[1] = {-198};
+  int netweights[32] = {-34,  -19,  -75,  48, -26,  118,  -120, 28, 34, 51, -26,  25, 23, -54,  -23,  100, 
+  -57,  40, 40, 51, -21,  -25,  18, -26,  -17,  -45,  -13,  -17,  -30,  34, -13,  22};
 
   // Different node types, used as a template parameter
   enum NodeType { NonPV, PV };
