@@ -34,6 +34,7 @@
 #include "tt.h"
 #include "uci.h"
 #include "syzygy/tbprobe.h"
+#include "nnue/evaluate_nnue.h"
 
 namespace Search {
 
@@ -220,6 +221,45 @@ void MainThread::search() {
       nodes = perft<true>(rootPos, Limits.perft);
       sync_cout << "\nNodes searched: " << nodes << "\n" << sync_endl;
       return;
+  }
+
+  constexpr size_t outputDimensions = Eval::NNUE::Network::PrevLayer::PrevLayer::kOutputDimensions;
+  constexpr size_t inputDimensions = Eval::NNUE::Network::PrevLayer::PrevLayer::kPaddedInputDimensions;
+  auto& biases = Eval::NNUE::network->previous_layer_.previous_layer_.biases_;
+  auto& weights = Eval::NNUE::network->previous_layer_.previous_layer_.weights_;
+
+  if (1)
+  {
+     size_t ndim=outputDimensions;
+     std::cout << "  int netbiases[" << ndim << "] = {";
+     for (size_t i=0; i < ndim; ++i)
+     {
+         std::cout << int(biases[i]);
+         if (i < ndim - 1) std::cout << ", ";
+     }
+     std::cout << "};" << std::endl;
+
+     ndim=inputDimensions * outputDimensions;
+     std::cout << "  int netweights[" << ndim << "] = {";
+     for (size_t i=0; i < ndim; ++i)
+     {
+         std::cout << int(weights[i]);
+         if (i < ndim - 1) std::cout << ", ";
+     }
+     std::cout << "};" << std::endl;
+  }
+  else
+  {
+     size_t ndim=outputDimensions;
+     for (size_t i=0; i < ndim; ++i)
+     {
+         biases[i] = netbiases[i];
+     }
+     ndim=inputDimensions * outputDimensions;
+     for (size_t i=0; i < ndim; ++i)
+     {
+        weights[i] = netweights[i];
+     }
   }
 
   Color us = rootPos.side_to_move();

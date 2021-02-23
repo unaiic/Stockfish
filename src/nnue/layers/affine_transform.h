@@ -432,7 +432,8 @@ namespace Eval::NNUE::Layers {
       return output;
     }
 
-   private:
+   // private:
+    using PrevLayer = PreviousLayer;
     using BiasType = OutputType;
     using WeightType = std::int8_t;
 
