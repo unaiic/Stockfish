@@ -224,7 +224,7 @@ void MainThread::search() {
   }
 
   constexpr size_t outputDimensions = Eval::NNUE::Network::PrevLayer::PrevLayer::kOutputDimensions;
-  constexpr size_t inputDimensions = Eval::NNUE::Network::PrevLayer::PrevLayer::kPaddedInputDimensions;
+  constexpr size_t inputDimensions = Eval::NNUE::Network::PrevLayer::PrevLayer::kInputDimensions ;
   auto& biases = Eval::NNUE::network->previous_layer_.previous_layer_.biases_;
   auto& weights = Eval::NNUE::network->previous_layer_.previous_layer_.weights_;
 
