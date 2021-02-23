@@ -248,7 +248,7 @@ void MainThread::search() {
      }
      std::cout << "};" << std::endl;
   }
-  else
+  /*else
   {
      size_t ndim=outputDimensions;
      for (size_t i=0; i < ndim; ++i)
@@ -260,7 +260,7 @@ void MainThread::search() {
      {
         weights[i] = netweights[i];
      }
-  }
+  }*/
 
   Color us = rootPos.side_to_move();
   Time.init(Limits, us, rootPos.game_ply());
