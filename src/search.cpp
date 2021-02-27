@@ -35,6 +35,9 @@
 #include "uci.h"
 #include "syzygy/tbprobe.h"
 
+int[6] = {12, 9, 6, 7, 7, 3};
+TUNE(t);
+
 namespace Search {
 
   LimitsType Limits;
@@ -678,7 +681,7 @@ namespace {
 
     // Update low ply history for previous move if we are near root and position is or has been in PV
     if (   ss->ttPv
-        && depth > 12
+        && depth > t[0]
         && ss->ply - 1 < MAX_LPH
         && !priorCapture
         && is_ok((ss-1)->currentMove))
@@ -832,7 +835,7 @@ namespace {
 
     // Step 7. Futility pruning: child node (~50 Elo)
     if (   !PvNode
-        &&  depth < 9
+        &&  depth < t[1]
         &&  eval - futility_margin(depth, improving) >= beta
         &&  eval < VALUE_KNOWN_WIN) // Do not return unproven wins
         return eval;
@@ -964,7 +967,7 @@ namespace {
 
     // Step 10. If the position is not in TT, decrease depth by 2
     if (   PvNode
-        && depth >= 6
+        && depth >= t[2]
         && !ttMove)
         depth -= 2;
 
@@ -1086,7 +1089,7 @@ moves_loop: // When in check, search starts from here
                   continue;
 
               // Futility pruning: parent node (~5 Elo)
-              if (   lmrDepth < 7
+              if (   lmrDepth < t[3]
                   && !ss->inCheck
                   && ss->staticEval + 174 + 157 * lmrDepth <= alpha
                   &&  (*contHist[0])[movedPiece][to_sq(move)]
@@ -1108,7 +1111,7 @@ moves_loop: // When in check, search starts from here
       // then that move is singular and should be extended. To verify this we do
       // a reduced search on all the other moves but the ttMove and if the
       // result is lower than ttValue minus a margin, then we will extend the ttMove.
-      if (    depth >= 7
+      if (    depth >= t[4]
           &&  move == ttMove
           && !rootNode
           && !excludedMove // Avoid recursive singular search
@@ -1182,7 +1185,7 @@ moves_loop: // When in check, search starts from here
       // We use various heuristics for the sons of a node after the first son has
       // been searched. In general we would like to reduce them, but there are many
       // cases where we extend a son if it has good chances to be "interesting".
-      if (    depth >= 3
+      if (    depth >= t[5]
           &&  moveCount > 1 + 2 * rootNode
           && (  !captureOrPromotion
               || moveCountPruning
