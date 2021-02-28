@@ -191,10 +191,10 @@ namespace {
   constexpr Value LazyThreshold1 =  Value(1565);
   constexpr Value LazyThreshold2 =  Value(1102);
   constexpr Value SpaceThreshold = Value(11551);
-  Value NNUEThreshold1 =   Value(682);
-  Value NNUEThreshold2 =   Value(176);
+  constexpr Value NNUEThreshold1 =   Value(829);
+  constexpr Value NNUEThreshold2 =   Value(147);
 
-  int scaling = 641;
+  int scaling = 637;
 
   TUNE(NNUEThreshold1, NNUEThreshold2, scaling);
 
