@@ -35,7 +35,7 @@
 #include "uci.h"
 #include "syzygy/tbprobe.h"
 
-constexpr int t[6] = {13, 9, 5, 9, 7, 3};
+constexpr int t[6] = {12, 9, 6, 8, 7, 3};
 
 namespace Search {
 
