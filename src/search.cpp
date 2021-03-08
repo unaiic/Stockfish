@@ -59,8 +59,8 @@ namespace {
 
   constexpr int netbiases[1] = {-193};
 
-  constexpr int netweights[32] = {-28,  -15,  -81,  57, -21,  126,  -111, 27, 30, 49, -34,  23, 13, -36,  -20,  94, 
-  -56,  35, 34, 40, -18,  -19,  15, -30,  -12,  -36,  -22,  -10,  -31,  27, -12,  18};
+  constexpr int netweights[32] = {-27,  -16,  -78,  57, -21,  123,  -115, 26, 31, 51, -34,  22, 13, -37,  -20,  95, 
+  -57,  34, 35, 41, -18,  -19,  16, -31,  -12,  -36,  -22,  -10,  -32,  26, -12,  18};
 
   // Different node types, used as a template parameter
   enum NodeType { NonPV, PV };
