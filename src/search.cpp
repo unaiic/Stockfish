@@ -57,11 +57,10 @@ using namespace Search;
 
 namespace {
 
-  int netbiases[1] = {-193};
-  TUNE(netbiases);
-  int netweights[32] = {-27,  -16,  -76,  57, -21,  121,  -118, 25, 31, 52, -34,  22, 13, -37,  -20,  96, 
-  -57,  34, 36, 41, -18,  -19,  16, -31,  -12,  -36,  -22,  -10,  -33,  26, -12,  18};
-  TUNE(netweights);
+  constexpr int netbiases[1] = {-150};
+
+  constexpr int netweights[32] = {-30,  -17,  -88,  47, -24,  147,  -76, 25, 25, 66, -30,  20, 10, -45,  -23,  90, 
+  -52,  33, 39, 54, -18,  -18,  18, -40,  -11,  -41,  -21,  -10,  -26,  23, -14,  18};
 
   // Different node types, used as a template parameter
   enum NodeType { NonPV, PV };
